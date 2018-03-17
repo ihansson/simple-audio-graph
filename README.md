@@ -1,4 +1,4 @@
-# simple-webaudio-keyboard
-A very basic keyboard implementation with oscillator type selector and volume control.
+# simple-audio-graph
+A very basic audio graph class, not fully functional, work in progress.
 
-![Imgur Image](https://i.imgur.com/3Do2ncp.png)
+![Imgur Image](https://i.imgur.com/OPR6fNq.png)
