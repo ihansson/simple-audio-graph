@@ -8,13 +8,21 @@
 
 <body>
     <h1>Simple Web Audio Graphs</h1>
-    <input id="toggleMute" type="button" value="Mute / Unmute" />
-    <h2>Graph A - TYPE</h2>
-    <div id="graphA"></div>
-    <h2>Graph B - TYPE</h2>
-    <div id="graphB"></div>
-    <h2>Graph C - TYPE</h2>
-    <div id="graphC"></div>
+    <div class="options">
+        <input id="toggleMute" type="button" value="Mute / Unmute" />
+    </div>
+    <div class="graphWrapper">
+        <h2>Graph A - Wave</h2>
+        <div class="graph" id="graphA"></div>
+    </div>
+    <div class="graphWrapper">
+        <h2>Graph B - Bars</h2>
+        <div class="graph" id="graphB"></div>
+    </div>
+    <div class="graphWrapper">
+        <h2>Graph C - Series</h2>
+        <div class="graph" id="graphC"></div>
+    </div>
     <script type="text/javascript" src="vendor/lodash.min.js"></script>
     <script type="text/javascript" src="vendor/jquery.min.js"></script>
     <script type="text/javascript" src="src/Graph.js"></script>

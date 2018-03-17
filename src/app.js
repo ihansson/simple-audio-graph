@@ -8,15 +8,15 @@ const GraphApp = {
     },
     init: function(args) {
         this.GraphA = Graph.create({
-            type: 'something',
+            type: 'Wave',
             $wrapper: args.$GraphA
         });
         this.GraphB = Graph.create({
-            type: 'something',
+            type: 'Bars',
             $wrapper: args.$GraphB
         });
         this.GraphC = Graph.create({
-            type: 'something',
+            type: 'Series',
             $wrapper: args.$GraphC
         });
         this.$toggleMute = args.$toggleMute
@@ -26,7 +26,7 @@ const GraphApp = {
 
         // Settings
         let frequency = 440;
-        let defaultVolume = 0.01;
+        let defaultVolume = 0.5;
         let volume = defaultVolume;
 
         // Audio Context
@@ -59,6 +59,7 @@ const GraphApp = {
         gainNode.connect(analyserNode)
         analyserNode.connect(Context.destination)
 
+
         // Audio Loop
         let loops = 0;
         const loop = () => {
@@ -66,14 +67,21 @@ const GraphApp = {
             oscillatorNode.frequency.setValueAtTime(this.getRandomCFrequency(), Context.currentTime);
             if (loops++ % 3 == 0) oscillatorNodeB.frequency.setValueAtTime(this.getRandomCFrequency(), Context.currentTime);
 
-            // Update analyser data and render graphs
-            analyserNode.getByteTimeDomainData(analyserDataArray);
-            this.updateGraphs(analyserDataArray)
 
             window.setTimeout(loop, 250)
 
         }
         loop()
+
+        const renderLoop = () => {
+            // Update analyser data and render graphs
+            analyserNode.getByteTimeDomainData(analyserDataArray);
+            this.updateGraphs(analyserDataArray)
+            window.requestAnimationFrame(renderLoop);
+
+        }
+        
+        window.requestAnimationFrame(renderLoop);
 
         // Mute Button
         this.$toggleMute.on('click', e => {
@@ -99,8 +107,8 @@ const GraphApp = {
 }
 
 const app = GraphApp.create({
-    "$GraphA": $('#GraphA'),
-    "$GraphB": $('#GraphB'),
-    "$GraphC": $('#GraphC'),
+    "$GraphA": $('#graphA'),
+    "$GraphB": $('#graphB'),
+    "$GraphC": $('#graphC'),
     "$toggleMute": $('#toggleMute')
 })
